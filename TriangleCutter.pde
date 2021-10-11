@@ -4,21 +4,6 @@ ArrayList<Polygon> cutTriangleSawtooth(Polygon input, int parts) {
     ArrayList<PVector> allPoints = new ArrayList<PVector>();
     int levels = parts / 2;
     float temp = levels + 1.0;
-    /*
-    for (int i = 0; i <= levels; i++ ) {
-        allPoints.add(lerp(input.get(0), input.get(2), i / (levels + 1.0)));
-        allPoints.add(lerp(input.get(1), input.get(2), i / (levels + 1.0)));
-    }
-    allPoints.add(lerp(input.get(1), input.get(2), 1));
-    
-    for (int i = 0; i < parts; i++) {
-        ArrayList<PVector> subTriangle = new ArrayList<PVector>();
-        subTriangle.add(allPoints.get(i));
-        subTriangle.add(allPoints.get(i + 1));
-        subTriangle.add(allPoints.get(i + 2));
-        output.add(new Polygon(subTriangle));
-    }
-    */
 
     for (int i = 0; i < levels; i++) {
         ArrayList<PVector> a1 = new ArrayList<PVector>();
