@@ -1,0 +1,34 @@
+model:
+    tree:
+        height      80  1
+        crown:
+            height              70  2
+            width               60  10
+            shapeVariance[u]    0.1 0.4  
+            hue                 150 10   
+            hueDecrement        12  1
+            brightness          30  5
+            brightnessIncrement 5   1
+            alpha               90  0
+            crownShape
+                * TRIANGLE  10
+                    colorHue            150 5   
+                    hueDecrement[u]     10  20
+                    side[d]             0   2
+                    zigzag[d]           0   2
+            crownColor
+                * UNIFORM   20
+                * CYCLIC    0
+                * GRADIENT  0
+        trunk:
+            # trunkHeight = treeHeight - crownHeight
+            width               8   3
+            shapeVariance[u]    0.1 0.4
+            hue                 33  5   
+            alpha               90  0
+            trunkShape
+                * RECTANGLE  50
+                * TRAPEZIUM 0
+                    widthDifference 3   1
+                * ROOTED    0
+    
