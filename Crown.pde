@@ -9,27 +9,45 @@ void drawCrown(Component tree) {
     float crownHeight = crown.getAttrf("height") * c;
     float crownBottom = (height - treeHeight) / 2 + crownHeight;
     float crownWidth = crown.getAttrf("width") * c;
-    float hue = crown.getAttrf("hue");
-    float hueDecrement = crown.getAttrf("hueDecrement");
-    float brightness = crown.getAttrf("brightness");
-    float brightnessIncrement = crown.getAttrf("brightnessIncrement");
+    float startHue = crown.getAttrf("startHue");
+    float endHue = crown.getAttrf("endHue");
+    float lowBrightness = crown.getAttrf("lowBrightness");
+    float highBrightness = crown.getAttrf("highBrightness");
+    int parts = (int) crown.getTraitAttr("crownShape", "parts");
     String crownShape = crown.getTraitCategory("crownShape");
-    
 
     Shape s = new Shape(DistortType.UNIFORM);
     s.variance = crown.getAttrf("shapeVariance");
     s.alpha = crown.getAttrf("alpha");
-    s.colour = color(hue, 100, 30);
     
     if (crownShape.equals("TRIANGLE")) {
         Polygon initTriangle = cf.createTriangleCrown(x, crownBottom, crownWidth, crownHeight);
-        ArrayList<Polygon> subTriangles = cutTriangleSawtooth(initTriangle, 7);
-        for (Polygon p: subTriangles) {
-            s.colour = color(hue, 100, brightness);
-            s.draw(p);
-            hue -= hueDecrement;
-            brightness += brightnessIncrement;
+        String triangleFlavor = crown.getTrait("crownShape").getTraitCategory("triangleFlavor");
+        if (triangleFlavor.equals("UNIFORM")) {
+            float hue = crown.getTrait("crownShape").getTraitAttrf("triangleFlavor", "hue");
+            s.colour = color(hue, 100, 80);
+            s.draw(initTriangle);
+        } else {
+            ArrayList<Polygon> subTriangles;
 
+            if (triangleFlavor.equals("SERRATED")) {
+                subTriangles  = cutTriangleSerrated(initTriangle, parts);
+            } else if (triangleFlavor.equals("ZIGZAG")) {
+                subTriangles  = cutTriangleZigZag(initTriangle, parts);
+            } else if (triangleFlavor.equals("PARALLEL")) {
+                subTriangles  = cutTriangleParallel(initTriangle, parts);
+            } else if (triangleFlavor.equals("RADIAL")) {
+                subTriangles = cutTriangleRadial(initTriangle, parts);
+            } else {
+                throw new IllegalStateException("Triangle flavor not recognized");
+            }
+
+            for (int i = 0; i < subTriangles.size(); i++) {
+                float hue = lerp(startHue, endHue, i / (subTriangles.size() - 1.0));
+                float brightness = lerp(lowBrightness, highBrightness, i / (subTriangles.size() - 1.0));
+                s.colour = color(hue, 100, brightness);
+                s.draw(subTriangles.get(i));
+            }
         }
     } else {
         println("Unknown crown shape");

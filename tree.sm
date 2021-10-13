@@ -5,24 +5,33 @@ model:
             height              70  2
             width               60  10
             shapeVariance[u]    0.1 0.4  
-            hue                 150 10   
-            hueDecrement        12  1
-            brightness          30  5
-            brightnessIncrement 5   1
+            startHue            160 10   
+            endHue              85  10
+            lowBrightness       35  5
+            highBrightness      80  5
             alpha               90  0
             crownShape
                 * TRIANGLE  10
-                    colorHue            150 5   
-                    hueDecrement[u]     10  20
-                    side[d]             0   2
-                    zigzag[d]           0   2
+                    parts[d]            5   15
+                    startingSide
+                        * LEFT  50
+                        * RIGHT 50
+                    triangleFlavor
+                        * UNIFORM   10
+                            hue     125 20
+                        * SERRATED  30
+                        * ZIGZAG    30
+                        * PARALLEL  30
+                        * RADIAL    30
+                * STACKED_TRIANGLES 0
+
             crownColor
                 * UNIFORM   20
                 * CYCLIC    0
                 * GRADIENT  0
         trunk:
             # trunkHeight = treeHeight - crownHeight
-            width               8   3
+            width               6   1
             shapeVariance[u]    0.1 0.4
             hue                 33  5   
             alpha               90  0
