@@ -1,7 +1,5 @@
 ArrayList<Polygon> cutTriangleSerrated(Polygon input, int parts) {
-    if (input.getVertices().size() != 3) {
-        throw new IllegalArgumentException("Input has to be triangle");
-    }
+    checkIfTriangle(input);
 
     ArrayList<Polygon> output = new ArrayList<Polygon>();
 
@@ -34,9 +32,7 @@ ArrayList<Polygon> cutTriangleSerrated(Polygon input, int parts) {
 }
 
 ArrayList<Polygon> cutTriangleZigZag(Polygon input, int parts) {
-    if (input.getVertices().size() != 3) {
-        throw new IllegalArgumentException("Input has to be triangle");
-    }
+    checkIfTriangle(input);
     ArrayList<Polygon> output = new ArrayList<Polygon>();
     
     ArrayList<PVector> first = new ArrayList<PVector>();
@@ -62,9 +58,7 @@ ArrayList<Polygon> cutTriangleZigZag(Polygon input, int parts) {
 }
 
 ArrayList<Polygon> cutTriangleParallel(Polygon input, int parts) {
-    if (input.getVertices().size() != 3) {
-        throw new IllegalArgumentException("Input has to be triangle");
-    }
+    checkIfTriangle(input);
     ArrayList<Polygon> output = new ArrayList<Polygon>();
     
     for (int i = 0; i < parts - 1; i++) {
@@ -88,9 +82,7 @@ ArrayList<Polygon> cutTriangleParallel(Polygon input, int parts) {
 }
 
 ArrayList<Polygon> cutTriangleRadial(Polygon input, int parts) {
-    if (input.getVertices().size() != 3) {
-        throw new IllegalArgumentException("Input has to be triangle");
-    }
+    checkIfTriangle(input);
     ArrayList<Polygon> output = new ArrayList<Polygon>();
     
     for (int i = 0; i < parts; i++) {
