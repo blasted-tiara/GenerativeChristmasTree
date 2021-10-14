@@ -11,19 +11,24 @@ model:
             highBrightness      80  5
             alpha               90  0
             crownShape
-                * TRIANGLE  10
+                * TRIANGLE          10
                     parts[d]            5   15
                     startingSide
                         * LEFT  50
                         * RIGHT 50
-                    triangleFlavor
+                    flavor
                         * UNIFORM   10
                             hue     125 20
                         * SERRATED  30
                         * ZIGZAG    30
                         * PARALLEL  30
                         * RADIAL    30
-                * STACKED_TRIANGLES 0
+                * STACKED_TRIANGLES 10
+                    parts[d]            4   7
+                    flavor
+                        * SAME_ANGLE        100
+                            angle               55  3
+                        * DIFFERENT_ANGLE   0
 
             crownColor
                 * UNIFORM   20
