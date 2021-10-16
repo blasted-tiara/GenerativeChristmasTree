@@ -24,11 +24,14 @@ model:
                         * PARALLEL  30
                         * RADIAL    30
                 * STACKED_TRIANGLES 10
-                    parts[d]            4   7
                     flavor
-                        * SAME_ANGLE        100
-                            angle               55  3
-                        * DIFFERENT_ANGLE   0
+                        * SAME_ANGLE        10
+                            parts[d]    4   7
+                            angle       55  3
+                        * DIFFERENT_ANGLE   10
+                            startAngle      35  7
+                            angleIncrement  4   1
+                            coreThickness   0.25 0.05
 
             crownColor
                 * UNIFORM   20

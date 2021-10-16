@@ -1,5 +1,6 @@
 void drawCrown(Component tree) {
     CrownFactory cf = new CrownFactory();
+    TriangleStacker ts = new TriangleStacker();
     
     Component crown = tree.getSubComponent("crown");
     
@@ -47,14 +48,19 @@ void drawCrown(Component tree) {
             drawCrownStack(subTriangles, s, g);
         }
     } else if (crownShape.equals("STACKED_TRIANGLES")) {
-        int parts = (int) crown.getTraitAttr("crownShape", "parts");
         Polygon initTriangle = cf.createTriangle(x, crownBottom, crownWidth, crownHeight);
         String flavor = crown.getTrait("crownShape").getTraitCategory("flavor");
         ArrayList<Polygon> subTriangles;
         
         if (flavor.equals("SAME_ANGLE")) {
-            float angle = crown.getTrait("crownShape").getTraitAttrf("flavor", "angle") * TWO_PI / 360;
-            subTriangles = stackTriangles(initTriangle, parts, angle);
+            int parts = (int) crown.getTrait("crownShape").getTraitAttr("flavor", "parts");
+            float angle = radians(crown.getTrait("crownShape").getTraitAttrf("flavor", "angle"));;
+            subTriangles = ts.stackTriangles(initTriangle, parts, angle);
+        } else if (flavor.equals("DIFFERENT_ANGLE")) {
+            float coreThickness = crown.getTrait("crownShape").getTraitAttrf("flavor", "coreThickness");
+            float startAngle = radians(crown.getTrait("crownShape").getTraitAttrf("flavor", "startAngle"));
+            float angleIncrement = radians(crown.getTrait("crownShape").getTraitAttrf("flavor", "angleIncrement"));
+            subTriangles = ts.stackTriangles(initTriangle, coreThickness, startAngle, angleIncrement);
         } else {
             throw new IllegalStateException("Tree shape flavor not recognized");
         }
