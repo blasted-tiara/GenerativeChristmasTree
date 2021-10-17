@@ -4,18 +4,14 @@ model:
         crown:
             height              70  2
             width               60  10
-            shapeVariance[u]    0.1 0.4  
+            shapeVariance[u]    0.1 0.05 
             startHue            160 10   
             endHue              85  10
             lowBrightness       35  5
             highBrightness      80  5
-            alpha               90  0
-            crownShape
-                * TRIANGLE          10
+            shape
+                * SINGLE_SHAPE      10
                     parts[d]            5   15
-                    startingSide
-                        * LEFT  50
-                        * RIGHT 50
                     flavor
                         * UNIFORM   10
                             hue     125 20
@@ -23,7 +19,7 @@ model:
                         * ZIGZAG    30
                         * PARALLEL  30
                         * RADIAL    30
-                * STACKED_TRIANGLES 10
+                * STACKED_SHAPES    100000
                     flavor
                         * SAME_ANGLE        10
                             parts[d]    4   7
@@ -32,7 +28,13 @@ model:
                             startAngle      35  7
                             angleIncrement  4   1
                             coreThickness   0.25 0.05
-
+                    baseShape
+                        * TRIANGLE          10
+                        * THIN_DROP         10
+                        * THICK_DROP        10
+                        * UP_ARROW          10
+                        * JAGGED_TRIANGLE   10
+                        * UMBRELLA          10
             crownColor
                 * UNIFORM   20
                 * CYCLIC    0
