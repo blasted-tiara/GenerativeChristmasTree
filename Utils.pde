@@ -6,8 +6,18 @@
  * @input angle     Amount of radians
  * @return          New PVector object that represents the rotated point
  */
-PVector rotatePoint(PVector p, PVector center, float angle) {
-    return PVector.sub(p, center).rotate(angle).add(center);
+PVector rotate(PVector point, PVector center, float angle) {
+    return PVector.sub(point, center).rotate(angle).add(center);
+}
+
+ArrayList<PVector> rotate(ArrayList<PVector> points, PVector center, float angle) {
+    ArrayList<PVector> output = new ArrayList<PVector>();
+
+    for (PVector p: points) {
+        output.add(rotate(p, center, angle));
+    }
+
+    return output;
 }
 
 /*
@@ -20,10 +30,10 @@ PVector rotatePoint(PVector p, PVector center, float angle) {
  * @input angle     Amount of radians
  * @return          New PVector object that represents the rotated point
  */
-PVector rotatePoint(float pX, float pY, float centerX, float centerY, float angle) {
+PVector rotate(float pX, float pY, float centerX, float centerY, float angle) {
     PVector p = new PVector(pX, pY);
     PVector center = new PVector(centerX, centerY);
-    return rotatePoint(p, center, angle);
+    return rotate(p, center, angle);
 }
 
 void drawLine(ArrayList<PVector> points) {
@@ -37,6 +47,20 @@ void drawLine(ArrayList<PVector> points) {
     noStroke();
 }
 
+void drawLine(ArrayList<PVector> points, Line l) {
+    PVector a, b;
+    for (int i = 0; i < points.size() - 1; i++) {
+        a = points.get(i);
+        b = points.get(i + 1);
+        l.bias((a.x + b.x)/2, (a.y + b.y)/2);
+        l.draw(a.x, a.y, b.x, b.y);
+    }
+}
+
+void drawPoint(PVector point, float radius) {
+    ellipse(point.x, point.y, radius, radius);
+}
+
 /**
  * Draws dots of specified radius at each position contained in the input array.
  * 
@@ -45,7 +69,7 @@ void drawLine(ArrayList<PVector> points) {
  */
 void drawPoints(ArrayList<PVector> points, float radius) {
     for (PVector p: points) {
-        ellipse(p.x, p.y, radius, radius);
+        drawPoint(p, radius);
     }
 }
 
@@ -187,4 +211,3 @@ void drawRectangle(Rectangle r) {
     alpha(50);
     rect(r.left, r.top, r.right, r.bottom);
 }
-
