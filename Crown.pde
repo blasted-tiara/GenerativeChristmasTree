@@ -23,27 +23,27 @@ void drawCrown(Component tree) {
     s.variance = crown.getAttrf("shapeVariance");
     s.alpha = 150;
     s.threshold = 5;
-    s.depth = 11;
+    s.depth = 9;
     
     if (shape.equals("SINGLE_SHAPE")) {
         int parts = (int) shapeT.getAttr("parts");
-        Polygon initTriangle = cf.createTriangle(x, crownBottom, crownWidth, crownHeight);
+        Polygon baseTriangle = cf.createTriangle(x, crownBottom, crownWidth, crownHeight);
         String flavor = shapeT.getTraitCategory("flavor");
         if (flavor.equals("UNIFORM")) {
             float hue = shapeT.getTraitAttrf("flavor", "hue");
             s.colour = color(hue, 100, 80);
-            s.draw(initTriangle);
+            s.draw(baseTriangle);
         } else {
             ArrayList<Polygon> subTriangles;
 
             if (flavor.equals("SERRATED")) {
-                subTriangles  = cutTriangleSerrated(initTriangle, parts);
+                subTriangles  = cutTriangleSerrated(baseTriangle, parts);
             } else if (flavor.equals("ZIGZAG")) {
-                subTriangles  = cutTriangleZigZag(initTriangle, parts);
+                subTriangles  = cutTriangleZigZag(baseTriangle, parts);
             } else if (flavor.equals("PARALLEL")) {
-                subTriangles  = cutTriangleParallel(initTriangle, parts);
+                subTriangles  = cutTriangleParallel(baseTriangle, parts);
             } else if (flavor.equals("RADIAL")) {
-                subTriangles = cutTriangleRadial(initTriangle, parts);
+                subTriangles = cutTriangleRadial(baseTriangle, parts);
             } else {
                 throw new IllegalStateException("Triangle flavor not recognized");
             }
@@ -51,19 +51,19 @@ void drawCrown(Component tree) {
             drawCrownStack(subTriangles, s, g);
         }
     } else if (shape.equals("STACKED_SHAPES")) {
-        Polygon initTriangle = cf.createTriangle(x, crownBottom, crownWidth, crownHeight);
+        Polygon baseTriangle = cf.createTriangle(x, crownBottom, crownWidth, crownHeight);
         String flavor = shapeT.getTraitCategory("flavor");
         ArrayList<Polygon> subShapes;
         
         if (flavor.equals("SAME_ANGLE")) {
             int parts = (int) shapeT.getTraitAttr("flavor", "parts");
             float angle = radians(shapeT.getTraitAttrf("flavor", "angle"));;
-            subShapes = ts.stackTriangles(initTriangle, parts, angle);
+            subShapes = ts.stackTriangles(baseTriangle, parts, angle);
         } else if (flavor.equals("DIFFERENT_ANGLE")) {
             float coreThickness = shapeT.getTraitAttrf("flavor", "coreThickness");
             float startAngle = radians(shapeT.getTraitAttrf("flavor", "startAngle"));
             float angleIncrement = radians(shapeT.getTraitAttrf("flavor", "angleIncrement"));
-            subShapes = ts.stackTriangles(initTriangle, coreThickness, startAngle, angleIncrement);
+            subShapes = ts.stackTriangles(baseTriangle, coreThickness, startAngle, angleIncrement);
         } else {
             throw new IllegalStateException("Tree shape flavor not recognized");
         }
