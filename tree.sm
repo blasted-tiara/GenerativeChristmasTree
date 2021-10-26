@@ -35,10 +35,31 @@ model:
                         * UP_ARROW          10
                         * JAGGED_TRIANGLE   10
                         * UMBRELLA          10
-            crownColor
-                * UNIFORM   20
-                * CYCLIC    0
-                * GRADIENT  0
+            decorations:
+                tinselGarland[1-5]:
+                    hue[u]  0   360        
+                lights:
+                    levels[d]   1   5
+                    type
+                        * SCATTERED 0
+                        * IN_LINE   10
+                    lightbulbs:
+                        radius      0.75 0.1;
+                        type
+                            * CIRCLE            10000000
+                                count[d]    1   5
+                            * ROUNDISH          10
+                            * SQUARE            10
+                                noOfSubSquares
+                                    * ONE   10
+                                    * TWO   10
+                                    * THREE 10
+                            * SWIRLING          10
+                            * RADIATING         10
+                decorations[2-5]:
+                    type
+                        * TYPE_A 10
+                        * TYPE_B 10
         trunk:
             # trunkHeight = treeHeight - crownHeight
             width               6   1

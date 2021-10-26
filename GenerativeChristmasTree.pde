@@ -1,8 +1,9 @@
 Metagen treeGenerator;
+Polygon baseTriangle;
 float c;
 
 String getFilePath(String fileName) {
-    return sketchPath() + "\\" + fileName;
+    return sketchPath() + "/" + fileName;
 }
 
 void setup() {
@@ -31,6 +32,7 @@ void drawExamples() {
     Component tree = model.getSubComponent("tree");
     drawTrunk(tree);
     drawCrown(tree);
+    drawLights(tree);
 }
 
 void draw() {}
