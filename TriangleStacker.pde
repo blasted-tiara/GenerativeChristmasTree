@@ -27,7 +27,6 @@ class TriangleStacker {
     
     ArrayList<Polygon> stackTriangles(Polygon input, float coreThickness, float startAngle, float angleIncrement) {
         CrownFactory cf = new CrownFactory();
-        drawPoints(input.getVertices(), 10);
 
         checkIfTriangle(input);
         ArrayList<Polygon> output = new ArrayList<Polygon>();
