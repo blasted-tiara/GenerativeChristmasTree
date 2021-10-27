@@ -37,7 +37,11 @@ PVector rotate(float pX, float pY, float centerX, float centerY, float angle) {
 }
 
 void drawLine(ArrayList<PVector> points) {
-    stroke(0);
+    drawLine(points, color(0));
+}
+
+void drawLine(ArrayList<PVector> points, color c) {
+    stroke(c);
     PVector a, b;
     for (int i = 0; i < points.size() - 1; i++) {
         a = points.get(i);
