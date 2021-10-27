@@ -5,8 +5,8 @@ model:
             height              70  2
             width               60  10
             shapeVariance[u]    0.1 0.05 
-            startHue            160 10   
-            endHue              85  10
+            startHue            170 10   
+            endHue              90  10
             lowBrightness       35  5
             highBrightness      80  5
             shape
@@ -36,10 +36,13 @@ model:
                         * JAGGED_TRIANGLE   10
                         * UMBRELLA          10
             decorations:
-                tinselGarland[1-5]:
+                tinselGarland[1-4]:
                     hue[u]  0   360        
+                    type
+                        * STRIP_LIKE  1000
+                        * FLUFFY      10
                 lights:
-                    levels[d]   2  5
+                    levels[d]   2  4
                     type
                         * SCATTERED 0
                         * IN_LINE   10

@@ -32,6 +32,7 @@ void drawExamples() {
     Component tree = model.getSubComponent("tree");
     drawTrunk(tree);
     drawCrown(tree);
+    drawTinselGarland(tree);
     drawLights(tree);
 }
 
