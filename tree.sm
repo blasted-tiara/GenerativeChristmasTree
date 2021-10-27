@@ -19,7 +19,7 @@ model:
                         * ZIGZAG    30
                         * PARALLEL  30
                         * RADIAL    30
-                * STACKED_SHAPES    100000
+                * STACKED_SHAPES    10
                     flavor
                         * SAME_ANGLE        10
                             parts[d]    4   7
@@ -39,23 +39,22 @@ model:
                 tinselGarland[1-5]:
                     hue[u]  0   360        
                 lights:
-                    levels[d]   1   5
+                    levels[d]   2  5
                     type
                         * SCATTERED 0
                         * IN_LINE   10
                     lightbulbs:
-                        radius      0.75 0.1;
+                        radius      0.9 0.1;
                         type
-                            * CIRCLE            10000000
+                            * CIRCLE            10
                                 count[d]    1   5
-                            * ROUNDISH          10
-                            * SQUARE            10
-                                noOfSubSquares
-                                    * ONE   10
-                                    * TWO   10
-                                    * THREE 10
+                            * ROUNDISH          0
+                            * POLYGON           10
+                                sides[d]    3   7
+                                count[d]    1   5
                             * SWIRLING          10
                             * RADIATING         10
+                                saturation  70 10
                 decorations[2-5]:
                     type
                         * TYPE_A 10
