@@ -60,4 +60,22 @@ class Polygon {
        fill(c, alpha);
        this.draw();
    }
+
+   void translate(PVector vector) {
+       for(PVector v: vertices) {
+           v.add(vector);
+       }
+   }
+
+   void rotate(float angle, PVector center) {
+        for (PVector v: vertices) {
+            v.sub(center).rotate(angle).add(center);
+        }
+   }
+
+   void rotate(float angle) {
+       for (PVector v: vertices) {
+           v.rotate(angle);
+       }
+   }
 }
