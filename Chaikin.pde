@@ -22,3 +22,7 @@ ArrayList<PVector> chaikinSmooth(ArrayList<PVector> points, float ratio, int ite
     
     return chaikinSmooth(output, ratio, iterations - 1, closed);
 }
+
+Polygon chaikinSmooth(Polygon p, float ratio, int iterations, boolean closed) {
+    return new Polygon(chaikinSmooth(p.vertices, ratio, iterations, closed));
+}
