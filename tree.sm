@@ -39,8 +39,8 @@ model:
                 tinselGarland[1-4]:
                     hue[u]  0   360        
                     type
-                        * STRIP_LIKE  1000
-                        * FLUFFY      10
+                        * STRIP_LIKE  10
+                        * FLUFFY      0
                 lights:
                     levels[d]   2  4
                     type
@@ -58,10 +58,46 @@ model:
                             * SWIRLING          10
                             * RADIATING         10
                                 saturation  70 10
-                decorations[2-5]:
+                ornament[10-20]:
                     type
-                        * TYPE_A 10
-                        * TYPE_B 10
+                        * BALL              10
+                            baseHue[u]  0   360
+                            radius  1   0.2
+                            type
+                                * UNIFORM       10
+                                * STRIPED       10
+                                    angle   0   20
+                                * STAR          10                            
+                                    angle   0   20
+                                * CONCENTRIC    10
+                        * SQUARE            10
+                            baseHue[u]  0   360
+                            radius  1   0.2
+                            angle   0   20
+                            type
+                                * UNIFORM       10
+                                * STRIPED       10
+                                    ratio       0.1 0.4
+                                * CONCENTRIC    10
+                                * STAR          10
+                        * HOLLY_DECORATION  1
+                            angle   0   30
+                            bgLeaf[0-3]:
+                                width               1.2 0.1
+                                height              2.7   0.2
+                                angleDisplacement   0   10
+                            fgLeaf[2-4]:
+                                width               1.5 0.1
+                                height              3   0.2
+                                angleDisplacement   0   10
+                            berry[2-6]:
+                                brightness          70  10
+                                angle[u]            0   360
+                                dist                0.5 0.1
+                        * BELL              0
+                            angle   90      0
+                        * CANDY_CANE        0
+                        * COMPOSITE         0
         trunk:
             # trunkHeight = treeHeight - crownHeight
             width               6   1

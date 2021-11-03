@@ -35,5 +35,39 @@ class DecorationElementFactory {
         return new Polygon(output);
     }
 
+    public Polygon createHollyLeaf(PVector center, float angle, float w, float h) {
+        ArrayList<PVector> output = new ArrayList<PVector>();
+
+        output.add(new PVector(0, h/2));
+        output.add(new PVector(0, h/2));
+        output.add(new PVector(w * 0.2, h * 0.3));
+        output.add(new PVector(w/2, h/4));
+        output.add(new PVector(w/2, h/4));
+        output.add(new PVector(w/4, h/8));
+        output.add(new PVector(w/2, 0));
+        output.add(new PVector(w/2, 0));
+        output.add(new PVector(w/4, -h/8));
+        output.add(new PVector(w/2, -h/4));
+        output.add(new PVector(w/2, -h/4));
+        output.add(new PVector(w * 0.2, -h * 0.3));
+        output.add(new PVector(0, -h/2));
+        output.add(new PVector(0, -h/2));
+        output.add(new PVector(-w * 0.2, -h * 0.3));
+        output.add(new PVector(-w/2, -h/4));
+        output.add(new PVector(-w/2, -h/4));
+        output.add(new PVector(-w/4, -h/8));
+        output.add(new PVector(-w/2, 0));
+        output.add(new PVector(-w/2, 0));
+        output.add(new PVector(-w/4, h/8));
+        output.add(new PVector(-w/2, h/4));
+        output.add(new PVector(-w/2, h/4));
+        output.add(new PVector(-w * 0.2, h * 0.3));
+
+        Polygon p = new Polygon(output);
+        p.rotate(angle);
+        p.translate(center);
+
+        return p;
+    }
 
 }

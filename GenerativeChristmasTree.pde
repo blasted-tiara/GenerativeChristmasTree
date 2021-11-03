@@ -1,6 +1,10 @@
+import geomerative.*;
+
 Metagen treeGenerator;
 Polygon baseTriangle;
+ArrayList<ECircle> particles;
 float c;
+
 
 String getFilePath(String fileName) {
     return sketchPath() + "/" + fileName;
@@ -8,8 +12,8 @@ String getFilePath(String fileName) {
 
 void setup() {
     size(800, 800);
+    RG.init(this);
     colorMode(HSB, 360, 100, 100);
-    noStroke();
     c = width/100;
 
     try {
@@ -22,8 +26,14 @@ void setup() {
     redraw();
 }
 
-void redraw() {
+void reinit() {
     background(360, 0, 100);
+    noStroke();
+    particles = new ArrayList<ECircle>();
+}
+
+void redraw() {
+    reinit();
     drawExamples();
 }
 
@@ -34,6 +44,7 @@ void drawExamples() {
     drawCrown(tree);
     drawTinselGarland(tree);
     drawLights(tree);
+    drawOrnaments(tree);
 }
 
 void draw() {}

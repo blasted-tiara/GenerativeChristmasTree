@@ -47,6 +47,9 @@ void drawCable(ArrayList<PVector> cableArr, Component lightbulbs) {
 void drawLightbulbs(ArrayList<PVector> lightbulbsArr, Component lightbulbs) {
     String type = lightbulbs.getTraitCategory("type");
     float radius = lightbulbs.getAttrf("radius") * c; 
+    for (PVector p: lightbulbsArr) {
+        particles.add(new ECircle(p, radius));
+    }
     for (int i = 0; i < lightbulbsArr.size(); i++) {
         if (type.equals("CIRCLE")) {
             int count = (int) lightbulbs.getTrait("type").getAttr("count");

@@ -17,6 +17,9 @@ void drawTinselGarland(Component tree) {
 }
 
 void drawTinselGarland(ArrayList<PVector> path, String type) {
+    for (PVector p: path) {
+        particles.add(new ECircle(p, c));
+    }
     if (type.equals("STRIP_LIKE")) {
         Line l = new Line(DistortType.POINT_BIASED, 1);
         l.distCoeff = 4;
