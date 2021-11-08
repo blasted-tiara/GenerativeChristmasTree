@@ -16,14 +16,13 @@ void drawCrown(Component tree) {
     Gradient g = new Gradient();
     g.startHue = crown.getAttrf("startHue");
     g.endHue = crown.getAttrf("endHue");
-    g.lowBrightness = crown.getAttrf("lowBrightness");
-    g.highBrightness = crown.getAttrf("highBrightness");
+    g.startBrightness = crown.getAttrf("lowBrightness");
+    g.endBrightness = crown.getAttrf("highBrightness");
 
     Shape s = new Shape(DistortType.UNIFORM);
     s.variance = crown.getAttrf("shapeVariance");
     s.alpha = 150;
-    s.threshold = 5;
-    s.depth = 9;
+    s.depth = 5;
     
     if (shape.equals("SINGLE_SHAPE")) {
         int parts = (int) shapeT.getAttr("parts");
@@ -71,7 +70,8 @@ void drawCrown(Component tree) {
         Trait baseShapeT = shapeT.getTrait("baseShape");
         TriangleShaper shaper = new TriangleShaper();
 
-        drawCrownStack(shaper.reshape(subShapes, baseShapeT.getCategory()), s, g);
+        ArrayList<Polygon> crownShapes = shaper.reshape(subShapes, baseShapeT.getCategory());
+        drawCrownStack(crownShapes, s, g);
     } else {
         println("Unknown crown shape");
     }
@@ -85,15 +85,17 @@ void drawCrownStack(ArrayList<Polygon> subShapes, Shape s, Gradient g) {
 }
 
 class Gradient {
-    float startHue;
-    float endHue;
-    float lowBrightness;
-    float highBrightness;
-    float saturation = 100;
+    float startHue = 0;
+    float endHue = 360;
+    float startBrightness = 100;
+    float endBrightness = 100;
+    float startSaturation = 100;
+    float endSaturation = 100;
     
     color getColorAt(float p) {
         float hue = lerp(startHue, endHue, p);
-        float brightness = lerp(lowBrightness, highBrightness, p);
+        float brightness = lerp(startBrightness, endBrightness, p);
+        float saturation = lerp(startSaturation, endSaturation, p);
         return color(hue, saturation, brightness);
     }
 }
