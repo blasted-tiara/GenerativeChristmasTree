@@ -17,8 +17,79 @@ void drawOrnament(PVector position, Component ornament) {
         drawSquareOrnament(position, ornament);
     } else if (type.equals("HOLLY_DECORATION")) {
         drawHollyDecoration(position, ornament);
+    } else if (type.equals("BELL")) {
+        drawBellDecoration(position, ornament);
+    } else if (type.equals("CANDY_CANE")) {
+        drawCandyCaneDecoration(position, ornament);
     }
 } 
+
+void drawCandyCaneDecoration(PVector position, Component ornament) {
+    Trait type = ornament.getTrait("type");
+
+    float angle = radians(type.getAttrf("angle"));
+    float stripesAngle = radians(type.getAttrf("stripesAngle"));
+    float w = type.getAttrf("width") * c;
+    float h = type.getAttrf("height") * c;
+    float radius = type.getAttrf("radius") * c;
+    float curvingAngle = radians(type.getAttrf("curvingAngle"));
+    int stripeDensity = (int) type.getAttrf("stripeDensity");
+
+    DecorationElementFactory def = new DecorationElementFactory ();
+    color[] colors = new color[2];
+    colors[0] = color(358, 86, 76);
+    colors[1] = color(0, 0, 100);
+
+    RPolygon candyCane = def.createCandyCane(position, w, h, angle, radius, curvingAngle);
+    drawStripedShape(candyCane.toShape(), stripesAngle, stripeDensity, colors);
+}
+
+void drawStripedShape(
+    RShape mask,
+    float angle,
+    int stripes,
+    color[] colors)
+{
+    RPoint[] bounds = mask.getBoundsPoints();
+    RPoint center = new RPoint(
+        (bounds[0].x + bounds[2].x)/2,
+        (bounds[0].y + bounds[2].y)/2
+    );
+    float sideLength = bounds[0].dist(bounds[2]);
+    float stripeThickness = sideLength / stripes;
+    
+    for (int i = 0; i < stripes; i++) {
+        float x = center.x - sideLength/2;
+        float y = center.y - sideLength/2 + i * stripeThickness;
+        RShape stripe = RShape.createRectangle(x, y, sideLength, stripeThickness);
+        stripe.rotate(angle, center);
+        fill(colors[i % colors.length]);
+        RShape masked = stripe.intersection(mask);
+        RG.shape(masked);
+    }
+}
+
+void drawBellDecoration(PVector position, Component ornament) {
+    DecorationElementFactory def = new DecorationElementFactory();
+
+    Trait bell = ornament.getTrait("type");
+    float angle = radians(bell.getAttrf("angle"));
+    float h = bell.getAttrf("height") * c;
+    float w = bell.getAttrf("width") * c;
+
+    pushMatrix();
+    translate(position.x, position.y);
+    fill(46, 55, 60);
+    ellipse(0, h/2, w/3, w/3);
+    popMatrix();
+
+    drawHollyDecoration(PVector.add(position, new PVector(0, -h * 0.4)), ornament);
+
+    Polygon bellBase = def.createBell(position, angle, w, h);
+    Polygon bellSmooth = chaikinSmooth(bellBase, 0.3, 4, true);
+    fill(46, 55, 83);
+    bellSmooth.draw();
+}
 
 void drawHollyDecoration(PVector position, Component ornament) {
     fill(color(0, 0, 0));

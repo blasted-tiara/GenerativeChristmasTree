@@ -70,4 +70,46 @@ class DecorationElementFactory {
         return p;
     }
 
+    public Polygon createBell(PVector center, float angle, float w, float h) {
+        ArrayList<PVector> output = new ArrayList<PVector>();
+
+        output.add(new PVector(w/2, h/2));
+        output.add(new PVector(w/2, h * 0.375));
+        output.add(new PVector(w/4, h/4));
+        output.add(new PVector(w/8, -h/2));
+        output.add(new PVector(-w/8, -h/2));
+        output.add(new PVector(-w/4, h/4));
+        output.add(new PVector(-w/2, h * 0.375));
+        output.add(new PVector(-w/2, h/2));
+
+        Polygon p = new Polygon(output);
+        p.rotate(angle);
+        p.translate(center);
+
+        return p;
+    }
+
+    public RPolygon createCandyCane(
+        PVector position,
+        float w,
+        float h,
+        float angle,
+        float radius,
+        float curvingAngle
+    ) {
+        float rectHeight = h - radius - w;
+        RPolygon flatPart = RPolygon.createRectangle(position.x - w/2, position.y - rectHeight/2, w, rectHeight);
+        RPolygon curvedPart = createRingSector(
+            position.x + w/2 + radius,
+            position.y - rectHeight/2,
+            radius + w,
+            radius,
+            PI,
+            curvingAngle
+        );
+
+        RPolygon output = flatPart.union(curvedPart);
+        output.rotate(angle, position.x, position.y);
+        return output;
+    }
 }

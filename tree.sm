@@ -4,7 +4,7 @@ model:
         crown:
             height              70  2
             width               60  10
-            shapeVariance[u]    0.1 0.05 
+            shapeVariance[u]    0   3 
             startHue            170 10   
             endHue              90  10
             lowBrightness       35  5
@@ -36,18 +36,18 @@ model:
                         * JAGGED_TRIANGLE   10
                         * UMBRELLA          10
             decorations:
-                tinselGarland[1-4]:
+                tinselGarland[1-6]:
                     hue[u]  0   360        
                     type
                         * STRIP_LIKE  10
                         * FLUFFY      0
                 lights:
-                    levels[d]   2  4
+                    levels[d]   2  6
                     type
                         * SCATTERED 0
                         * IN_LINE   10
                     lightbulbs:
-                        radius      0.9 0.1;
+                        radius      0.9 0.1
                         type
                             * CIRCLE            10
                                 count[d]    1   5
@@ -62,7 +62,7 @@ model:
                     type
                         * BALL              10
                             baseHue[u]  0   360
-                            radius  1   0.2
+                            radius  2   1
                             type
                                 * UNIFORM       10
                                 * STRIPED       10
@@ -72,7 +72,7 @@ model:
                                 * CONCENTRIC    10
                         * SQUARE            10
                             baseHue[u]  0   360
-                            radius  1   0.2
+                            radius  2   1
                             angle   0   20
                             type
                                 * UNIFORM       10
@@ -80,7 +80,7 @@ model:
                                     ratio       0.1 0.4
                                 * CONCENTRIC    10
                                 * STAR          10
-                        * HOLLY_DECORATION  1
+                        * HOLLY_DECORATION  2
                             angle   0   30
                             bgLeaf[0-3]:
                                 width               1.2 0.1
@@ -94,19 +94,42 @@ model:
                                 brightness          70  10
                                 angle[u]            0   360
                                 dist                0.5 0.1
-                        * BELL              0
-                            angle   90      0
-                        * CANDY_CANE        0
-                        * COMPOSITE         0
+                        * BELL              2
+                            width   2   0.2
+                            height  1.7 0.2
+                            angle   0   0
+                            fgLeaf[2-3]:
+                                width               1   0.1
+                                height              2   0.1
+                                angleDisplacement   30   10
+                            berry[0-1]:
+                                brightness          70  10
+                                angle[u]            0   360
+                                dist                0.2 0.05
+                        * CANDY_CANE        2
+                            width               1   0.1 
+                            height              5   0.6
+                            radius              0.8   0.2
+                            stripesAngle        0   20
+                            curvingAngle        220 20
+                            angle               0   20
+                            stripeDensity[d]    8   12
         trunk:
             # trunkHeight = treeHeight - crownHeight
             width               6   1
-            shapeVariance[u]    0.1 0.4
-            hue                 33  5   
-            alpha               90  0
+            shapeVariance[u]    5 0.4
             trunkShape
-                * RECTANGLE  50
-                * TRAPEZIUM 0
-                    widthDifference 3   1
-                * ROOTED    0
-    
+                * RECTANGLE 10
+                * TRAPEZIUM 1000000
+                    angle   80  5
+            trunkColor:
+                hue                 33  5   
+                alpha               200 0
+                coloringType
+                    * UNIFORM   10
+                    * SHADED    10
+                        shadeValue  25  3
+                    * GRADIENT  1000000
+                        steps[d]        4   11
+                        darkestShade    40  10
+
